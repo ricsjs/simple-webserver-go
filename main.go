@@ -22,8 +22,14 @@ type Book struct {
 func GetBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 
-	book := Book{Title: "Nome do livro", Author: "Autor do livro", Pages: 304}
-	json.NewEncoder(w).Encode(book)
+	books := []Book{ // Cria uma slice de livros
+		{Title: "Nome do livro", Author: "Autor do livro", Pages: 304},
+		{Title: "Outro livro", Author: "Outro autor", Pages: 256},
+	}
+
+	books = append(books, Book{Title: "Mais um livro", Author: "Mais um autor", Pages: 312}) // Adiciona mais um livro à slice
+
+	json.NewEncoder(w).Encode(books)
 }
 
 func main() {
